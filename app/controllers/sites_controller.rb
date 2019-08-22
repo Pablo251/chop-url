@@ -13,7 +13,9 @@ class SitesController < ApplicationController
   # POST /sites
   def create
     hash_url_code = SecureRandom.hex(4)
-    new_site = { full_url: @sent_url, short_url: hash_url_code, accessed_attempts: 1 }
+    shorted_url = "#{request.base_url}/go/#{hash_url_code}"
+    new_site = { full_url: @sent_url, short_url: shorted_url,
+                 short_hash: hash_url_code, accessed_attempts: 1 }
 
     @site = Site.new(new_site)
     if @site.save
@@ -34,7 +36,7 @@ class SitesController < ApplicationController
 
   # GET: Redirect to the real URL
   def go_to_url
-    url = Site.find_by_short_url(@sent_url).full_url
+    url = Site.find_by_short_hash(@sent_url).full_url
 
     redirect_to url, status: 301
   end
