@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "904d933d-cdef-4ba5-b45c-7d6048170fa7",
+		"name": "Chop-url-live",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://chop-url-api.herokuapp.com/sites",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"url\": \"https://www.netflix.com/browse\"\n}"
+				},
+				"url": {
+					"raw": "https://chop-url-api.herokuapp.com/sites",
+					"protocol": "https",
+					"host": [
+						"chop-url-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://chop-url-api.herokuapp.com/top_trending_sites",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://chop-url-api.herokuapp.com/top_trending_sites",
+					"protocol": "https",
+					"host": [
+						"chop-url-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"top_trending_sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://chop-url-api.herokuapp.com/go/HASH_URL_CODE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://chop-url-api.herokuapp.com/go/HASH_URL_CODE",
+					"protocol": "https",
+					"host": [
+						"chop-url-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"go",
+						"HASH_URL_CODE"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

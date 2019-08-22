@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "d02cb26c-9827-45e4-b3e9-e7886eefb6f8",
+		"name": "Chop-url-local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/sites",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"https://stackoverflow.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/sites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/top_trending_sites",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/top_trending_sites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"top_trending_sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/go/HASH_URL_CODE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/go/HASH_URL_CODE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"go",
+						"HASH_URL_CODE"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
