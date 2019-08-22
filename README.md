@@ -36,11 +36,12 @@ Now the project is set, for start and run it use the next command:
     $ rails s
 ## Usage
 The API has three endpoints
+
 |VERB|  Endpoint| Definition |
 |--|--|--|
 |POST| /sites  | Creates a new short URL, and return the shortened URL |
-|GET| /top_trending_sites| Returns the 100 most requested URLs to be shortened
-|GET| /go/`Shortened_URL_Code` | Redirect you to the shortened URL
+|GET| /top_trending_sites| Returns the 100 most requested URLs to be shortened |
+|GET| /go/`Shortened_URL_Code` | Redirect you to the shortened URL |
 
 ## Others
 The project includes two postman collection for testing. One for local testing and the other for live testing in Heroku were the application demo is currently running
