@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
   before_action :site_params, only: [:create, :go_to_url]
   before_action :find_match, only: :create
+  before_action :new_url_builder, only: :create
 
   # GET /sites
   def index
@@ -10,28 +11,25 @@ class SitesController < ApplicationController
   def show
   end
 
-  # POST /sites
-  def create
-    hash_url_code = SecureRandom.hex(4)
-    shorted_url = "#{request.base_url}/go/#{hash_url_code}"
-    new_site = { full_url: @sent_url, short_url: shorted_url,
-                 short_hash: hash_url_code, accessed_attempts: 1 }
-
-    @site = Site.new(new_site)
-    if @site.save
-      SiteMetaCrawlerJob.perform_later @site
-      render json: @site, status: :created, location: @site
-    else
-      render json: @site.errors, status: :unprocessable_entity
-    end
-  end
-
   # PATCH/PUT /sites/1
   def update
   end
 
   # DELETE /sites/1
   def destroy
+  end  
+
+  # POST: Creates a new shorten url
+  def create
+    @site = Site.new(@new_site)
+    if @site.save
+      SiteMetaCrawlerJob.perform_later @site
+
+      render json: @site, status: :created, location: @site
+    else
+
+      render json: @site.errors, status: :unprocessable_entity
+    end
   end
 
   # GET: Redirect to the real URL
@@ -45,11 +43,11 @@ class SitesController < ApplicationController
   def top_trending_sites
     top_100 = Site.all.order('accessed_attempts DESC').limit(100)
 
-    render json: top_100, status: :created
+    render json: top_100, status: :ok
   end  
 
   private
-    # Only allow a trusted parameter "white list" through.
+    # Only allow a trusted parameter through a "whitelist"
     def site_params
       permited_params = params.permit(:url)
       @sent_url = permited_params.fetch(:url).strip
@@ -62,7 +60,16 @@ class SitesController < ApplicationController
       if site_match.present?
         site_match.rate_site
 
-        render json: site_match, status: :created, location: site_match
+        render json: site_match, status: :ok, location: site_match
       end      
+    end
+
+    # Generates a unique/random hash code for the sent URL
+    def new_url_builder
+      hash_url_code = SecureRandom.hex(4)
+      shorted_url = "#{request.base_url}/go/#{hash_url_code}"
+
+      @new_site = { full_url: @sent_url, short_url: shorted_url,
+                   short_hash: hash_url_code, accessed_attempts: 1 }
     end
 end
